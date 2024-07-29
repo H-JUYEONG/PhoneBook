@@ -26,6 +26,9 @@ flush privileges;
 person 계정
 -------------------------------*/
 
+-- person_db 사용
+use person_db;
+
 -- 테이블 생성
 create table person(
     person_id integer primary key auto_increment,
