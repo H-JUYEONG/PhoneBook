@@ -47,193 +47,193 @@ public class PersonDao {
 			System.out.println("error:" + e);
 		}
 	}
-	
+
 	// 추가
-		public int insertPerson(String name, String hp, String company) {
+	public int insertPerson(String name, String hp, String company) {
 
-			int count = -1;
+		int count = -1;
 
-			this.getConnection();
+		this.getConnection();
 
-			try {
-				// 3. SQL문 준비 / 바인딩 / 실행
-				// *sql문 준비
-				String query = "";
-				query += " insert into person ";
-				query += " values(null, ?, ?, ?) ";
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// *sql문 준비
+			String query = "";
+			query += " insert into person ";
+			query += " values(null, ?, ?, ?) ";
 
-				// *바인딩
-				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, name);
-				pstmt.setString(2, hp);
-				pstmt.setString(3, company);
+			// *바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, hp);
+			pstmt.setString(3, company);
 
-				// *실행
-				count = pstmt.executeUpdate();
+			// *실행
+			count = pstmt.executeUpdate();
 
-				// 4.결과처리
-				System.out.println(count + "건 등록되었습니다.");
+			// 4.결과처리
+			System.out.println(count + "건 등록되었습니다.");
 
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			} 
-			
-			this.close();
-
-			return count;
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
 		}
 
-		// 삭제
-		public int deletePerson(int id) {
+		this.close();
 
-			int count = -1;
-			
-			this.getConnection();
+		return count;
+	}
 
-			try {
-				// 3. SQL문 준비 / 바인딩 / 실행
-				// *sql문 준비
-				String query = "";
-				query += " delete from person ";
-				query += " where person_id = ? ";
+	// 삭제
+	public int deletePerson(int id) {
 
-				// *바인딩
-				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, id);
+		int count = -1;
 
-				// *실행
-				count = pstmt.executeUpdate();
+		this.getConnection();
 
-				// 4.결과처리
-				System.out.println(count + "건 삭제되었습니다.");
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// *sql문 준비
+			String query = "";
+			query += " delete from person ";
+			query += " where person_id = ? ";
 
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			} 
-			
-			this.close();
+			// *바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
 
-			return count;
+			// *실행
+			count = pstmt.executeUpdate();
+
+			// 4.결과처리
+			System.out.println(count + "건 삭제되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
 		}
 
-		// 수정
-		public int updatePerson(String name, int id) {
+		this.close();
 
-			int count = -1;
-			
-			this.getConnection();
+		return count;
+	}
 
-			try {
-				// 3. SQL문 준비 / 바인딩 / 실행
-				// *sql문 준비
-				String query = "";
-				query += " update person ";
-				query += " set person_name = ? ";
-				query += " where person_id = ? ";
+	// 수정
+	public int updatePerson(String name, int id) {
 
-				// *바인딩
-				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, name);
-				pstmt.setInt(2, id);
+		int count = -1;
 
-				// *실행
-				count = pstmt.executeUpdate();
+		this.getConnection();
 
-				// 4.결과처리
-				System.out.println(count + "건 업데이트 되었습니다.");
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// *sql문 준비
+			String query = "";
+			query += " update person ";
+			query += " set person_name = ? ";
+			query += " where person_id = ? ";
 
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			} 
+			// *바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setInt(2, id);
 
-			this.close();
+			// *실행
+			count = pstmt.executeUpdate();
 
-			return count;
+			// 4.결과처리
+			System.out.println(count + "건 업데이트 되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
 		}
 
-		// 조회1
-		public PersonVo selectPersonOne(int id) {
+		this.close();
 
-			PersonVo personVo = null;
-			
-			this.getConnection();
-			
-			try {
-				// 3. SQL문 준비 / 바인딩 / 실행
-				// sql문 준비(insert문을 자바의 문자열로 만든다.)
-				String query = "";
-				query += " select person_id, ";
-				query += "		  person_name, ";
-				query += "        person_hp, ";
-				query += "        person_company ";
-				query += " from person ";
-				query += " where person_id = ? ";
+		return count;
+	}
 
-				// 바인딩
-				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, id);
+	// 조회1
+	public PersonVo selectPersonOne(int id) {
 
-				// 실행
-				rs = pstmt.executeQuery();
+		PersonVo personVo = null;
 
-				// 4.결과처리
-				rs.next();
+		this.getConnection();
+
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// sql문 준비(insert문을 자바의 문자열로 만든다.)
+			String query = "";
+			query += " select person_id, ";
+			query += "		  person_name, ";
+			query += "        person_hp, ";
+			query += "        person_company ";
+			query += " from person ";
+			query += " where person_id = ? ";
+
+			// 바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+
+			// 실행
+			rs = pstmt.executeQuery();
+
+			// 4.결과처리
+			rs.next();
+			int personId = rs.getInt("person_id");
+			String name = rs.getString("person_name");
+			String hp = rs.getString("person_hp");
+			String company = rs.getString("person_company");
+
+			personVo = new PersonVo(personId, name, hp, company);
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		this.close();
+
+		return personVo;
+	}
+
+	// 전체 조회
+	public List<PersonVo> selectPersonAll() {
+
+		List<PersonVo> personList = new ArrayList<PersonVo>();
+
+		this.getConnection();
+
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// sql문 준비(insert문을 자바의 문자열로 만든다.)
+			String query = "";
+			query += " select person_id, ";
+			query += "		  person_name, ";
+			query += "        person_hp, ";
+			query += "        person_company ";
+			query += " from person ";
+
+			// 바인딩
+			pstmt = conn.prepareStatement(query);
+
+			// 실행
+			rs = pstmt.executeQuery();
+
+			// 4.결과처리
+			while (rs.next()) {
 				int personId = rs.getInt("person_id");
 				String name = rs.getString("person_name");
 				String hp = rs.getString("person_hp");
 				String company = rs.getString("person_company");
 
-				personVo = new PersonVo(personId, name, hp, company);
+				PersonVo personVo = new PersonVo(personId, name, hp, company);
+				personList.add(personVo);
+			}
 
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			} 
-			
-			this.close();
-			
-			return personVo;
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
 		}
 
-		// 전체 조회
-		public List<PersonVo> selectPersonAll() {
+		this.close();
 
-			List<PersonVo> personList = new ArrayList<PersonVo>();
-
-			this.getConnection();
-			
-			try {
-				// 3. SQL문 준비 / 바인딩 / 실행
-				// sql문 준비(insert문을 자바의 문자열로 만든다.)
-				String query = "";
-				query += " select person_id, ";
-				query += "		  person_name, ";
-				query += "        person_hp, ";
-				query += "        person_company ";
-				query += " from person ";
-
-				// 바인딩
-				pstmt = conn.prepareStatement(query);
-
-				// 실행
-				rs = pstmt.executeQuery();
-
-				// 4.결과처리
-				while (rs.next()) {
-					int personId = rs.getInt("person_id");
-					String name = rs.getString("person_name");
-					String hp = rs.getString("person_hp");
-					String company = rs.getString("person_company");
-
-					PersonVo personVo = new PersonVo(personId, name, hp, company);
-					personList.add(personVo);
-				}
-
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			} 
-			
-			this.close();
-			
-			return personList;
-		}
+		return personList;
+	}
 }
